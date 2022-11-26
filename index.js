@@ -56,6 +56,16 @@ app.get("/books", (req, res) => {
     });
 })
 
+app.get("/books/:id/delete", (req, res) => {
+    const idBook = req.params.id;
+
+    const sql = "DELETE FROM books WHERE id = " + idBook;
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.redirect('/books')
+    });
+})
+
 app.listen(PORT, () => {
     console.log("Server running on port:" + PORT);
 });
