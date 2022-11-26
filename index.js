@@ -47,6 +47,15 @@ app.post("/books/create", (req, res) => {
     });
 });
 
+app.get("/books", (req, res) => {
+    const sql = "SELECT * FROM books";
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(result)
+        res.render("index", {books: result});
+    });
+})
+
 app.listen(PORT, () => {
     console.log("Server running on port:" + PORT);
 });
